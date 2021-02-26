@@ -17,7 +17,7 @@ export default class ToDoView {
         let newListId = "todo-list-" + newList.id;
         let listElement = document.createElement("div");
         listElement.setAttribute("id", newListId);
-        listElement.setAttribute("class", "todo_button");
+        listElement.setAttribute("class", "todo_button list-item");
         listElement.appendChild(document.createTextNode(newList.name));
         listsElement.appendChild(listElement);
 
@@ -62,8 +62,9 @@ export default class ToDoView {
             // NOW BUILD ALL THE LIST ITEMS
             let listItem = list.items[i];
             let listItemElement = "<div id='todo-list-item-" + listItem.id + "' class='list-item-card'>"
-                                + "<div class='task-col'>" + listItem.description + "</div>"
+                                + "<div class='task-col' contentEditable='true' >" + listItem.description + "</div>"
                                 + "<div class='due-date-col'>" + listItem.dueDate + "</div>"
+                                //"<div class='due-date-col' id='due-date-picker'> <input type='date' value='" + listItem.dueDate + "'> </div>"
                                 + "<div class='status-col'>" + listItem.status + "</div>"
                                 + "<div class='list-controls-col'>"
                                 + " <div class='list-item-control material-icons'>keyboard_arrow_up</div>"
@@ -73,8 +74,13 @@ export default class ToDoView {
                                 + " <div class='list-item-control'></div>"
                                 + "</div>";
             itemsListDiv.innerHTML += listItemElement;
+
+
+            
         }
     }
+
+    
 
     // THE VIEW NEEDS THE CONTROLLER TO PROVIDE PROPER RESPONSES
     setController(initController) {

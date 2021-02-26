@@ -5,7 +5,7 @@
         TOGETHER WILL MAKE UP A GIVEN THEME
     */
     --swatch-foundation:    #d9d6cc; /* USED FOR BODY BACKGROUND */
-    --swatch-primary:       #40454e; /* DOMINANT COLOR, USED FOR MOST BACKGROUNDS */
+    --swatch-primary:       rgb(64, 69, 78); /* DOMINANT COLOR, USED FOR MOST BACKGROUNDS */
     --swatch-complement:    #353a44; /* USED IN CONTRAST BACKGROUND FOR TOOLBARS */
     --swatch-contrast:      #111111; /* USED IN MOUSE-OVER SELECTION OF LARGE ELEMENTS */
     --swatch-accent:        #ffc819; /* USED IN MOUSE-OVER SELECTION OF TEXT AND BORDERS */  
@@ -21,17 +21,20 @@
     font-family: var(--font-primary);
 }
 
+
 .grid-item {
     background-color: var(--swatch-primary);
 }
 
+
 #navbar {
-    box-shadow: 2px 2px 2px var(--swatch-primary); 
+    box-shadow: 2px 3px 2px #636363;
 }
 
 #left-sidebar {
     background-color: var(--swatch-complement);
     color: rgb(233,237,240);
+    text-align: center;
 }
 
 #workspace {
@@ -46,20 +49,27 @@
 }
 
 #left-sidebar-header {
-    border-bottom: dotted;
+    border-bottom: 2px dotted;
 }
+
 
 #todo-list-table-header {
     border-bottom: dotted;
 }
 
 .list-header-card {
-    border-bottom: dotted;
+    border-bottom: 2px dotted;
 }
 
 .list-item-card {
-    border-bottom: solid;
+    border-bottom: 1px solid;
 }
+
+/* my thing*/
+.list-item-card:hover {
+    background-color: #5c6066;
+}
+
 
 .todo_button {
     cursor:pointer;
@@ -67,5 +77,14 @@
 }
 
 .todo_button:hover {
-    background-color: var(--swatch-contrast);
+    background-color: var(--swatch-primary);
+}
+
+.todo_button_grid {
+    cursor:pointer;
+    background-color: var(--swatch-primary);
+}
+
+.todo_button_grid:hover {
+    background-color: #5c6066;
 }
