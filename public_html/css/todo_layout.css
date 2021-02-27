@@ -81,6 +81,7 @@ html, body {
     flex-direction: row;
 }
 
+
 .task-col {
     display: flex;
     width:25%;
@@ -107,5 +108,7 @@ html, body {
 }
 
 .list-item-control {
+    display: flex;
     width: 20%;
+    align-items: center;
 }

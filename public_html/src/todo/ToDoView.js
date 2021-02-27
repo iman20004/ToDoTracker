@@ -50,6 +50,15 @@ export default class ToDoView {
         }
     }
 
+    taskFocused(ev) {
+        let field = ev.target
+        let current = field.innerHTML;
+        field.setAttribute("style", "border: solid 2px #1E90FF; background-color: #5c6066; font-size: 12px; font-weight: 400");
+        onsole.log(listItem.description);
+
+    }
+
+
     // LOADS THE list ARGUMENT'S ITEMS INTO THE VIEW
     viewList(list) {
         // WE'LL BE ADDING THE LIST ITEMS TO OUR WORKSPACE
@@ -61,8 +70,9 @@ export default class ToDoView {
         for (let i = 0; i < list.items.length; i++) {
             // NOW BUILD ALL THE LIST ITEMS
             let listItem = list.items[i];
-            let listItemElement = "<div id='todo-list-item-" + listItem.id + "' class='list-item-card'>"
-                                + "<div class='task-col' contentEditable='true' >" + listItem.description + "</div>"
+            /*let listItemElement = "<div id='todo-list-item-" + listItem.id + "' class='list-item-card'>"
+                                //+ "<input class='task-col' id = 'task-field' type = 'text' onfocus = 'editingField()' onblur =  'defaultLook()' value ='" + listItem.description + "'>"
+                                //"<div class='task-col'>" + listItem.description + "</div>"
                                 + "<div class='due-date-col'>" + listItem.dueDate + "</div>"
                                 //"<div class='due-date-col' id='due-date-picker'> <input type='date' value='" + listItem.dueDate + "'> </div>"
                                 + "<div class='status-col'>" + listItem.status + "</div>"
@@ -73,11 +83,122 @@ export default class ToDoView {
                                 + " <div class='list-item-control'></div>"
                                 + " <div class='list-item-control'></div>"
                                 + "</div>";
-            itemsListDiv.innerHTML += listItemElement;
+
+            itemsListDiv.innerHTML += listItemElement;*/
+
+            // Creating div todo-list-item-x 
+            let listItemElement = document.createElement('div')
+            listItemElement.id = 'todo-list-item-' + listItem.id
+            listItemElement.className = 'list-item-card'
+
+            // Task field
+            let task = document.createElement('input')
+            task.className = 'task-col input-fields';
+            task.id = 'task-field-'+ listItem.id;
+            task.type = 'text';
+            task.value = listItem.description;
+            task.setAttribute( "style" , "border: 0px; background: transparent");
+
+            // Date field
+            let date = document.createElement('input');
+            date.className = 'due-date-col input-fields';
+            date.id = 'date-field-'+ listItem.id;
+            date.value = listItem.dueDate;
+            date.setAttribute( "style" , "border: 0px; background: transparent");
+
+            // Status field
+            let status = document.createElement('input');
+            status.className = 'status-col input-fields';
+            status.id = 'status-field-'+ listItem.id;
+            status.value = listItem.status;
+            status.setAttribute( "style" , "border: 0px; background: transparent");
+
+            // Controls div
+            let controls = document.createElement('div');
+            controls.className = 'list-controls-col';
+
+            // Arrow up 
+            let arrowUp = document.createElement('div');
+            arrowUp.className = 'list-item-control material-icons';
+            arrowUp.innerHTML = 'keyboard_arrow_up';
+
+            // Arrow down
+            let arrowDown = document.createElement('div');
+            arrowDown.className = 'list-item-control material-icons';
+            arrowDown.innerHTML = 'keyboard_arrow_down';
+
+            // Close item
+            let close = document.createElement('div');
+            close.className = 'list-item-control material-icons';
+            close.innerHTML = 'close';
 
 
-            
+            controls.appendChild(arrowUp);
+            controls.appendChild(arrowDown);
+            controls.appendChild(close);
+
+            listItemElement.appendChild(task);
+            listItemElement.appendChild(date);
+            listItemElement.appendChild(status);
+            listItemElement.appendChild(controls);
+            itemsListDiv.appendChild(listItemElement);
+
+
+            // Task field events
+            task.onfocus = function(event) {
+                let field = event.target;
+                let current = field.innerHTML;
+                field.setAttribute("style", "border: solid 2px #1E90FF; background-color: #5c6066; font-size: 12px; font-weight: 400");
+            }
+
+            task.onblur = function(event) {
+                let field = event.target;
+                let current = field.value;
+                listItem.setDescription(current);
+                field.setAttribute("style", "border: 0px; background: transparent");
+                console.log(listItem.getDescription());
+                
+            }
+
+            // Date field events
+            date.onfocus = function(event) {
+                let field = event.target;
+                let current = field.innerHTML;
+                field.setAttribute("type", "date");
+                field.setAttribute("style", "border: solid 2px #1E90FF; background-color: #5c6066; font-size: 12px; font-weight: 400");
+            }
+
+            date.onblur = function(event) {
+                let field = event.target;
+                //let current = field.innerHTML;
+                field.setAttribute("type", "");
+                field.setAttribute("style", "border: 0px; background: transparent");
+
+            }
+
+            // Status field events
+            status.onfocus = function(event) {
+                let field = event.target;
+
+                let selector = document.createElement('select')
+                selector.value = listItem.status;
+                selector.className = 'status-col input-fields';
+                let op1 = document.createElement('option');
+                op1.innerHTML = "complete";
+                selector.appendChild(op1);
+                let op2 = document.createElement('option');
+                op2.innerHTML = "incomplete";
+                selector.appendChild(op2);
+                selector.setAttribute("style", "border: solid 2px #1E90FF; background-color: transparent; font-size: 12px; font-weight: 400");
+                field.appendChild(selector);
+                
+                
+            }
+
         }
+        
+    
+
     }
 
     

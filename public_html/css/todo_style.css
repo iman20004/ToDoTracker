@@ -13,12 +13,13 @@
     --swatch-text:          #e9edf0; /* USED IN MOUSE-OVER SELECTION OF TEXT AND BORDERS */ 
     --swatch-text-accent:   #ffc819; /* USED IN MOUSE-OVER SELECTION OF TEXT AND BORDERS */  
 
-    --font-primary:         'Lexend Exa', sans-serif;
+    --font-primary:         'Consolas'; 
 }
 
 #grid-container {
     background-color: var(--swatch-foundation);
     font-family: var(--font-primary);
+    color: var(--swatch-text);
 }
 
 
@@ -63,6 +64,15 @@
 
 .list-item-card {
     border-bottom: 1px solid;
+}
+
+/* my thing*/
+.input-fields {
+    font-family: var(--font-primary);
+    color: var(--swatch-text);
+    font-style: normal; 
+    font-weight: 700; 
+    font-size: 16px; 
 }
 
 /* my thing*/
