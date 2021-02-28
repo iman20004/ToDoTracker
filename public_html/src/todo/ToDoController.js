@@ -40,4 +40,8 @@ export default class ToDoController {
     handleListDeletion(){
         this.model.removeCurrentList();
     }
+
+    handleDescChange(oldText, newText, id) {
+        this.model.UpdateDescriptionTransaction(oldText,newText, id);
+    }
 }

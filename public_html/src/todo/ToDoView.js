@@ -179,21 +179,22 @@ export default class ToDoView {
             listItemElement.appendChild(controls);
             itemsListDiv.appendChild(listItemElement);
 
+            let thisController = this.controller;
 
             // Task field events
+            var oldDesc = "";
             task.onfocus = function(event) {
                 let field = event.target;
-                let current = field.innerHTML;
+                oldDesc = field.value;
                 field.setAttribute("style", "border: solid 2px #1E90FF; background-color: #5c6066; font-size: 12px; font-weight: 400");
             }
-
+            
             task.onblur = function(event) {
                 let field = event.target;
-                let current = field.value;
-                listItem.setDescription(current);
+                let newDesc = field.value;
+                //listItem.setDescription(current);
                 field.setAttribute("style", "border: 0px; background: transparent");
-                console.log(listItem.getDescription());
-                
+                thisController.handleDescChange(oldDesc, newDesc, i);
             }
 
             // Date field events
@@ -229,13 +230,17 @@ export default class ToDoView {
                 field.replaceWith(selector);
             }
 
+            /* Arrow up event
+            arrowUp.onclick = function(event) {
+                let field = event.target;
+                let id = event.id;
+                let above = field.sibling;
+                console.log(id + " " + above)
+            }*/
+
         }
-        
-    
 
     }
-
-    
 
     // THE VIEW NEEDS THE CONTROLLER TO PROVIDE PROPER RESPONSES
     setController(initController) {
