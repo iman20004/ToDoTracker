@@ -15,6 +15,8 @@ export default class ToDoList {
         this.id = initId;
         this.name = "Unnknown";
         this.items = [];
+        /* mywork*/
+        this.time = Date.now();
     }   
     
     // GETTER/SETTER METHODS
@@ -30,6 +32,16 @@ export default class ToDoList {
     getId() {
         return this.id;
     }
+
+    /*mywork start*/
+    getTime() {
+        return this.time;
+    }
+
+    setTime() {
+        this.time = Date.now();
+    }
+    /*mywork end*/
 
     /**
      * Adds an item to the end of the list.

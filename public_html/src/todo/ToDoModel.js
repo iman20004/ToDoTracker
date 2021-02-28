@@ -127,6 +127,9 @@ export default class ToDoModel {
         if (listIndex >= 0) {
             let listToLoad = this.toDoLists[listIndex];
             this.currentList = listToLoad;
+            // mywork below line
+            this.currentList.setTime();
+            this.view.refreshLists(this.toDoLists);
             this.view.viewList(this.currentList);
         }
     }

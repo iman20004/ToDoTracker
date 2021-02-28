@@ -18,6 +18,14 @@ export default class ToDoView {
         let listElement = document.createElement("div");
         listElement.setAttribute("id", newListId);
         listElement.setAttribute("class", "todo_button list-item");
+        
+        /*let textNode = document.createElement("input");
+        textNode.type = 'text';
+        textNode.value = newList.name;
+        textNode.setAttribute( "style" , "border: 0px; background: transparent");
+        textNode.setAttribute("contenteditable", "false");
+        listElement.appendChild(textNode);*/
+
         listElement.appendChild(document.createTextNode(newList.name));
         listsElement.appendChild(listElement);
 
@@ -26,6 +34,13 @@ export default class ToDoView {
         listElement.onmousedown = function() {
             thisController.handleLoadList(newList.id);
         }
+
+        /*
+        listElement.ondblclick = function(event){
+            let selected = event.target;
+            //let text = selected.childNode;
+            //text.setAttribute("contenteditable", true);
+        }*/
     }
 
     // REMOVES ALL THE LISTS FROM THE LEFT SIDEBAR
@@ -38,18 +53,28 @@ export default class ToDoView {
         }
     }
 
+
     // REFRESHES ALL THE LISTS IN THE LEFT SIDEBAR
     refreshLists(lists) {
         // GET THE UI CONTROL WE WILL APPEND IT TO
         let listsElement = document.getElementById("todo-lists-list");
         listsElement.innerHTML = "";
 
-        for (let i = 0; i < lists.length; i++) {
+        let array = lists;
+
+        array.sort(function(a, b){
+            let t1 = a.getTime();
+            let t2 = b.getTime();
+            return t2-t1;
+        });
+
+        for (let i = 0; i < array.length; i++) {
             let list = lists[i];
             this.appendNewListToView(list);
         }
     }
 
+    // POPS UP A MODAL TO ASK FOR CONFIRMATION
     confirmDeletion() {
         let control = this.controller;
         var modal = document.getElementById("my-modal");
