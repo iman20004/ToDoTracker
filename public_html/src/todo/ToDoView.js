@@ -50,11 +50,22 @@ export default class ToDoView {
         }
     }
 
-    taskFocused(ev) {
-        let field = ev.target
-        let current = field.innerHTML;
-        field.setAttribute("style", "border: solid 2px #1E90FF; background-color: #5c6066; font-size: 12px; font-weight: 400");
-        onsole.log(listItem.description);
+    confirmDeletion() {
+        let control = this.controller;
+        var modal = document.getElementById("my-modal");
+        modal.style.display = "block";
+
+        var confirm = document.getElementById("modal-confirm");
+
+        var cancel = document.getElementById("modal-cancel");
+        var close = document.getElementById("modal-close");
+
+        cancel.onclick = (event) => { modal.style.display = "none";}
+        close.onclick = (event) => { modal.style.display = "none";}
+        confirm.onclick = function(){
+            modal.style.display = "none"; 
+            control.handleListDeletion();
+        }
 
     }
 
@@ -190,9 +201,7 @@ export default class ToDoView {
                 op2.innerHTML = "incomplete";
                 selector.appendChild(op2);
                 selector.setAttribute("style", "border: solid 2px #1E90FF; background-color: transparent; font-size: 12px; font-weight: 400");
-                field.appendChild(selector);
-                
-                
+                field.replaceWith(selector);
             }
 
         }

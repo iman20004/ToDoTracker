@@ -24,7 +24,7 @@ export default class ToDoController {
             appModel.redo();
         }
         document.getElementById("delete-list-button").onmousedown = function() {
-            appModel.removeCurrentList();
+            appModel.getConfirmation();
         }
         document.getElementById("add-item-button").onmousedown = function() {
             appModel.addNewItemTransaction();
@@ -35,5 +35,9 @@ export default class ToDoController {
     handleLoadList(listId) {
         // UNLOAD THE CURRENT LIST AND INSTEAD LOAD THE CURRENT LIST
         this.model.loadList(listId);
+    }
+
+    handleListDeletion(){
+        this.model.removeCurrentList();
     }
 }

@@ -13,39 +13,63 @@
 
 <body>
     <div id="grid-container">
-        <div id="navbar" class="grid-item">
+
+        <div id="navbar">
             <div id="title-div">
                 Todo Tracker
             </div>
         </div>
+
         <div id="left-sidebar">
-            <div id="left-sidebar-header">
-                <span class="left-sidebar-header-text todo_button">Todolists</span>
+            <div id="left-sidebar-header" class="header-font">
+                <span class="left-sidebar-header-text">Todolists</span>
                 <span class="left-sidebar-controls" id="add-undo-redo-box">
                     <span id="add-list-button" class="material-icons todo_button">add_box</span>
                     <span id="undo-button" class="material-icons todo_button">undo</span>
                     <span id="redo-button" class="material-icons todo_button">redo</span>
                 </span>
             </div>
-            <div id="todo-lists-list"></div>
+            <div id="todo-lists-list" ></div>
         </div>
+
         <div id="workspace">
-            <div id="todo-list-header-card" class="list-header-card">
+            <div id="todo-list-header-card" class="list-header-card header-font">
                 <div id="task-col-header" class="task-col todo_button_grid">Task</div>
                 <div id="date-col-header" class="due-date-col todo_button_grid">Due Date</div>
                 <div id="status-col-header" class="status-col todo_button_grid">Status</div>
                 <div class="list-controls-col">
                     <div class="list-item-control"></div>
                     <div class="list-item-control"></div>
-                    <div id="add-item-button" class="list-item-control material-icons todo_button_grid">add_box</span></div>
-                    <div id="delete-list-button" class="list-item-control material-icons todo_button_grid">delete</span></div>
-                    <div id="close-list-button" class="list-item-control material-icons todo_button_grid">close</span></div>
+                    <div id="add-item-button" class="list-item-control material-icons ">add_box</span></div>
+                    <div id="delete-list-button" class="list-item-control material-icons ">delete</span></div>
+                    <div id="close-list-button" class="list-item-control material-icons ">close</span></div>
                 </div>
             </div>
             <div id="todo-list-items-div"></div>
             <br />
         </div>
+
     </div>
+
+    <div id="my-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div id="modal-title">Delete List?</div>
+                <div id="modal-close-button">
+                    <span id="modal-close" class="modal-control">&times;</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <span id="modal-confirm" class="modal-button modal-control">Confirm</span>
+                <span class="modal-button"></span>
+                <span class="modal-button"></span>
+                <span id="modal-cancel" class="modal-button modal-control">Cancel</span>
+            </div>
+        </div>
+    </div>
+
 </body>
+
+
 
 </html>

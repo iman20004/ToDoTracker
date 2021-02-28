@@ -148,16 +148,22 @@ export default class ToDoModel {
         this.view.viewList(this.currentList);
     }
 
+    getConfirmation(){
+        this.view.confirmDeletion();
+    }
+
     /**
      * Finds and then removes the current list.
      */
     removeCurrentList() {
+
         let indexOfList = -1;
         for (let i = 0; (i < this.toDoLists.length) && (indexOfList < 0); i++) {
             if (this.toDoLists[i].id === this.currentList.id) {
                 indexOfList = i;
             }
         }
+
         this.toDoLists.splice(indexOfList, 1);
         this.currentList = null;
         this.view.clearItemsList();

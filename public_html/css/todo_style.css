@@ -16,37 +16,61 @@
     --font-primary:         'Consolas'; 
 }
 
+
+.modal {
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4);
+    font-family: var(--font-primary);
+    color: var(--swatch-text);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.modal-content{
+    background-color: rgb(64, 69, 78);
+}
+
+.modal-button {
+    font-family: var(--font-primary);
+    color: var(--swatch-text);
+    font-size: 14px;
+}
+
+.modal-control:hover{
+    cursor: pointer;
+    background-color: rgba(255,255,255, 0.5);
+}
+
 #grid-container {
     background-color: var(--swatch-foundation);
     font-family: var(--font-primary);
     color: var(--swatch-text);
 }
 
-
-.grid-item {
+#navbar {
+    box-shadow: 2px 3px 2px #636363;
     background-color: var(--swatch-primary);
 }
 
-
-#navbar {
-    box-shadow: 2px 3px 2px #636363;
-}
-
 #left-sidebar {
+    box-shadow: 2px 3px 2px #636363;
     background-color: var(--swatch-complement);
     color: rgb(233,237,240);
     text-align: center;
 }
 
 #workspace {
+    box-shadow: 2px 3px 2px #636363;
     background-color: var(--swatch-primary);
     color: rgb(233,237,240);
 }
 
 #title-div {
-    color: rgb(255,200,25);
-    font-weight: bold;
-    font-size: 14pt;
+    padding: 5px;
+    color: #ffc800;
+    font-family: 'Consolas';
+    font-weight: 700;
+    font-size: 24px;
 }
 
 #left-sidebar-header {
@@ -64,6 +88,18 @@
 
 .list-item-card {
     border-bottom: 1px solid;
+}
+
+#todo-lists-list {
+    font-style: normal; 
+    font-weight: 700; 
+    font-size: 16px; 
+}
+
+.header-font {
+    font-style: normal; 
+    font-weight: 700; 
+    font-size: 19px; 
 }
 
 /* my thing*/
@@ -87,7 +123,7 @@
 }
 
 .todo_button:hover {
-    background-color: var(--swatch-primary);
+    background-color: rgba(255,255,255, 0.5);
 }
 
 .todo_button_grid {
@@ -96,5 +132,19 @@
 }
 
 .todo_button_grid:hover {
+    background-color: #5c6066;
+}
+
+.todo_button_control:hover {
+    background-color: rgba(255,255,255, 0.5);
+}
+
+.list-item-control:hover {
+    cursor:pointer;
+    background-color: rgba(255,255,255, 0.5);
+}
+
+.left-sidebar-header-text:hover{
+    cursor:pointer;
     background-color: #5c6066;
 }
