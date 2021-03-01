@@ -8,6 +8,7 @@ import UpdateDescription_Transaction from './transactions/UpdateDescription_Tran
 import UpdateDate_Transaction from './transactions/UpdateDate_Transaction.js'
 import Swap_Transaction from './transactions/Swap_Transaction.js'
 import DeleteItem_Transaction from './transactions/DeleteItem_Transaction.js'
+import ToDoView from './ToDoView.js'
 
 /**
  * ToDoModel
@@ -152,6 +153,8 @@ export default class ToDoModel {
      * Load the items for the listId list into the UI.
      */
     loadList(listId) {
+        this.tps.clearAllTransactions();
+
         let listIndex = -1;
         for (let i = 0; (i < this.toDoLists.length) && (listIndex < 0); i++) {
             if (this.toDoLists[i].id === listId)
@@ -284,4 +287,10 @@ export default class ToDoModel {
             this.tps.undoTransaction();
         }
     } 
+
+    closeCurrentList() {
+        this.currentList = null;
+        this.tps.clearAllTransactions();
+        this.view.clearItemsList();
+    }
 }

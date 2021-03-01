@@ -52,7 +52,7 @@ export default class ToDoView {
             parent.removeChild(parent.firstChild);
         }
     }
-
+    
 
     // REFRESHES ALL THE LISTS IN THE LEFT SIDEBAR
     refreshLists(lists) {
