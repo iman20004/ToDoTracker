@@ -5,6 +5,7 @@ import ToDoListItem from './ToDoListItem.js'
 import jsTPS from '../common/jsTPS.js'
 import AddNewItem_Transaction from './transactions/AddNewItem_Transaction.js'
 import UpdateDescription_Transaction from './transactions/UpdateDescription_Transaction.js'
+import UpdateDate_Transaction from './transactions/UpdateDate_Transaction.js'
 
 /**
  * ToDoModel
@@ -79,6 +80,11 @@ export default class ToDoModel {
 
     UpdateDescriptionTransaction(oldD,newD, id) {
         let transaction = new UpdateDescription_Transaction(this, oldD, newD, id);
+        this.tps.addTransaction(transaction);
+    }
+
+    UpdateDateTransaction(oldDat,newDat, id) {
+        let transaction = new UpdateDate_Transaction(this, oldDat, newDat, id);
         this.tps.addTransaction(transaction);
     }
 
@@ -182,12 +188,25 @@ export default class ToDoModel {
     updateDesc(ind, newDesc) {
         let itemDesc = this.currentList.getItemAtIndex(ind);
         itemDesc.setDescription(newDesc);
+        this.view.viewList(this.currentList);
     }
 
-    redoUpdateDesc(ind, oldDes) {
+    redoUpdateDesc(ind, oldDesc) {
         let itemDesc = this.currentList.getItemAtIndex(ind);
-        itemDesc.setDescription(newDesc);
-        this.view.refreshLists(this.toDoLists);
+        itemDesc.setDescription(oldDesc);
+        this.view.viewList(this.currentList);
+    }
+
+    updateDate(index, newDate) {
+        let item = this.currentList.getItemAtIndex(ind);
+        item.setDate(newDate);
+        this.view.viewList(this.currentList);
+    }
+
+    redoUpdateDate(index, oldDate) {
+        let item = this.currentList.getItemAtIndex(ind);
+        item.setDescription(oldDate);
+        this.view.viewList(this.currentList);
     }
 
     // WE NEED THE VIEW TO UPDATE WHEN DATA CHANGES.

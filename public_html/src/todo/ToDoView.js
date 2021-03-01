@@ -192,7 +192,6 @@ export default class ToDoView {
             task.onblur = function(event) {
                 let field = event.target;
                 let newDesc = field.value;
-                //listItem.setDescription(current);
                 field.setAttribute("style", "border: 0px; background: transparent");
                 thisController.handleDescChange(oldDesc, newDesc, i);
             }
@@ -207,10 +206,10 @@ export default class ToDoView {
 
             date.onblur = function(event) {
                 let field = event.target;
-                //let current = field.innerHTML;
+                let newDate = field.value;
                 field.setAttribute("type", "");
                 field.setAttribute("style", "border: 0px; background: transparent");
-
+                thisController.handleDateChange(field.getDescription(), newDate, i);
             }
 
             // Status field events

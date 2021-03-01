@@ -44,4 +44,8 @@ export default class ToDoController {
     handleDescChange(oldText, newText, id) {
         this.model.UpdateDescriptionTransaction(oldText,newText, id);
     }
+
+    handleDateChange(oldDate, newDate, id){
+        this.model.UpdateDateTransaction(oldDate,newDate, id);
+    }
 }
