@@ -142,12 +142,17 @@ export default class ToDoView {
             date.value = listItem.dueDate;
             date.setAttribute( "style" , "border: 0px; background: transparent");
 
+            /*let form = document.createElement('form');
+            form.className = 'status-col';*/
+
             // Status field
-            let status = document.createElement('input');
+            let status = document.createElement('div');
             status.className = 'status-col input-fields';
             status.id = 'status-field-'+ listItem.id;
-            status.value = listItem.status;
-            status.setAttribute( "style" , "border: 0px; background: transparent");
+            status.innerHTML = listItem.status;
+            status.setAttribute( "style" , "border: 0px; background-color: transparent");
+
+            //form.appendChild(status);
 
             // Controls div
             let controls = document.createElement('div');
@@ -193,13 +198,14 @@ export default class ToDoView {
                 let field = event.target;
                 let newDesc = field.value;
                 field.setAttribute("style", "border: 0px; background: transparent");
-                thisController.handleDescChange(oldDesc, newDesc, i);
+                thisController.handleDescChange(oldDesc, newDesc, listItem.id);
             }
 
             // Date field events
+            var oldDate = "";
             date.onfocus = function(event) {
                 let field = event.target;
-                let current = field.innerHTML;
+                oldDate = field.value;
                 field.setAttribute("type", "date");
                 field.setAttribute("style", "border: solid 2px #1E90FF; background-color: #5c6066; font-size: 12px; font-weight: 400");
             }
@@ -209,11 +215,11 @@ export default class ToDoView {
                 let newDate = field.value;
                 field.setAttribute("type", "");
                 field.setAttribute("style", "border: 0px; background: transparent");
-                thisController.handleDateChange(field.getDescription(), newDate, i);
+                thisController.handleDateChange(oldDate, newDate, listItem.id);
             }
 
             // Status field events
-            status.onfocus = function(event) {
+            status.onclick = function(event) {
                 let field = event.target;
 
                 let selector = document.createElement('select')
@@ -227,15 +233,33 @@ export default class ToDoView {
                 selector.appendChild(op2);
                 selector.setAttribute("style", "border: solid 2px #1E90FF; background-color: transparent; font-size: 12px; font-weight: 400");
                 field.replaceWith(selector);
+
+                /*selector.onfocusout = function(event) {
+                    console.log("hellohello");
+                }*/
+
             }
 
-            /* Arrow up event
-            arrowUp.onclick = function(event) {
-                let field = event.target;
-                let id = event.id;
-                let above = field.sibling;
-                console.log(id + " " + above)
+            /*status.onblur = function(event) {
+                console.log("hello");
             }*/
+
+
+            // Arrow Up event
+            arrowUp.onclick = function(event) {
+                thisController.handleSwap(i, (i-1));
+        
+            }
+
+            // Arrow Down event
+            arrowDown.onclick = function(event) {
+                thisController.handleSwap(i, (i+1));
+            }
+
+            // close event
+            close.onclick = function(event) {
+                thisController.handleDeleteItem(listItem.id);
+            }
 
         }
 

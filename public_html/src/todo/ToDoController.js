@@ -48,4 +48,12 @@ export default class ToDoController {
     handleDateChange(oldDate, newDate, id){
         this.model.UpdateDateTransaction(oldDate,newDate, id);
     }
+
+    handleSwap(index1, index2){
+        this.model.SwapTransaction(index1, index2);
+    }
+
+    handleDeleteItem(itemID) {
+        this.model.DeleteItemTransaction(itemID);
+    }
 }

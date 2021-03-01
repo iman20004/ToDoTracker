@@ -6,6 +6,8 @@ import jsTPS from '../common/jsTPS.js'
 import AddNewItem_Transaction from './transactions/AddNewItem_Transaction.js'
 import UpdateDescription_Transaction from './transactions/UpdateDescription_Transaction.js'
 import UpdateDate_Transaction from './transactions/UpdateDate_Transaction.js'
+import Swap_Transaction from './transactions/Swap_Transaction.js'
+import DeleteItem_Transaction from './transactions/DeleteItem_Transaction.js'
 
 /**
  * ToDoModel
@@ -86,6 +88,25 @@ export default class ToDoModel {
     UpdateDateTransaction(oldDat,newDat, id) {
         let transaction = new UpdateDate_Transaction(this, oldDat, newDat, id);
         this.tps.addTransaction(transaction);
+    }
+
+    SwapTransaction(item1, item2) {
+        let transaction = new Swap_Transaction(this, item1, item2);
+        this.tps.addTransaction(transaction);
+    }
+
+    DeleteItemTransaction(itemID) {
+        let listIndex = -1;
+        for (let i = 0; (i < this.currentList.items.length); i++) {
+            if (this.currentList.items[i].id === itemID)
+                listIndex = i;
+        }
+        if (listIndex >= 0) {
+            let item = this.currentList.getItemAtIndex(listIndex);
+            let transaction = new DeleteItem_Transaction(this, listIndex, item);
+            this.tps.addTransaction(transaction);
+        }
+        
     }
 
     /**
@@ -185,27 +206,68 @@ export default class ToDoModel {
         this.view.refreshLists(this.toDoLists);
     }
 
-    updateDesc(ind, newDesc) {
-        let itemDesc = this.currentList.getItemAtIndex(ind);
-        itemDesc.setDescription(newDesc);
+    updateDesc(descID, newDesc) {
+        let listIndex = -1;
+        for (let i = 0; (i < this.currentList.items.length); i++) {
+            if (this.currentList.items[i].id === descID)
+                listIndex = i;
+        }
+        if (listIndex >= 0) {
+            let itemDesc = this.currentList.getItemAtIndex(listIndex);
+            itemDesc.setDescription(newDesc);
+            this.view.viewList(this.currentList);
+        }
+        
+    }
+
+    redoUpdateDesc(descID, oldDesc) {
+        let listIndex = -1;
+        for (let i = 0; (i < this.currentList.items.length); i++) {
+            if (this.currentList.items[i].id === descID)
+                listIndex = i;
+        }
+        if (listIndex >= 0) {
+            let itemDesc = this.currentList.getItemAtIndex(listIndex);
+            itemDesc.setDescription(oldDesc);
+            this.view.viewList(this.currentList);
+        }
+    }
+
+    updateDate(dateID, newDate) {
+        let listIndex = -1;
+        for (let i = 0; (i < this.currentList.items.length); i++) {
+            if (this.currentList.items[i].id === dateID)
+                listIndex = i;
+        }
+        if (listIndex >= 0) {
+            let item = this.currentList.getItemAtIndex(listIndex);
+            item.setDueDate(newDate);
+            this.view.viewList(this.currentList);
+        }
+    }
+
+    redoUpdateDate(dateID, oldDate) {
+        let listIndex = -1;
+        for (let i = 0; (i < this.currentList.items.length); i++) {
+            if (this.currentList.items[i].id === dateID)
+                listIndex = i;
+        }
+        if (listIndex >= 0) {
+            let item = this.currentList.getItemAtIndex(listIndex);
+            item.setDueDate(oldDate);
+            this.view.viewList(this.currentList);
+        }
+    }
+
+    swapItems(firstInd, secondInd) {
+        var item = this.currentList.getItemAtIndex(firstInd); 
+        this.currentList.items[firstInd] = this.currentList.items[secondInd];
+        this.currentList.items[secondInd] = item;
         this.view.viewList(this.currentList);
     }
 
-    redoUpdateDesc(ind, oldDesc) {
-        let itemDesc = this.currentList.getItemAtIndex(ind);
-        itemDesc.setDescription(oldDesc);
-        this.view.viewList(this.currentList);
-    }
-
-    updateDate(index, newDate) {
-        let item = this.currentList.getItemAtIndex(ind);
-        item.setDate(newDate);
-        this.view.viewList(this.currentList);
-    }
-
-    redoUpdateDate(index, oldDate) {
-        let item = this.currentList.getItemAtIndex(ind);
-        item.setDescription(oldDate);
+    undoRemoveItem(index, item) {
+        this.currentList.items.splice(index, 0, item);
         this.view.viewList(this.currentList);
     }
 
