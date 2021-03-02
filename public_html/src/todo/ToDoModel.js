@@ -7,6 +7,7 @@ import AddNewItem_Transaction from './transactions/AddNewItem_Transaction.js'
 import UpdateDescription_Transaction from './transactions/UpdateDescription_Transaction.js'
 import UpdateDate_Transaction from './transactions/UpdateDate_Transaction.js'
 import Swap_Transaction from './transactions/Swap_Transaction.js'
+import UpdateStatus_Transaction from './transactions/UpdateStatus_Transaction.js'
 import DeleteItem_Transaction from './transactions/DeleteItem_Transaction.js'
 import ToDoView from './ToDoView.js'
 
@@ -93,6 +94,11 @@ export default class ToDoModel {
 
     SwapTransaction(item1, item2) {
         let transaction = new Swap_Transaction(this, item1, item2);
+        this.tps.addTransaction(transaction);
+    }
+
+    UpdateStatusTransaction(oldStatus,newStatus, id ) {
+        let transaction = new UpdateStatus_Transaction(this, oldStatus, newStatus, id);
         this.tps.addTransaction(transaction);
     }
 
@@ -259,6 +265,32 @@ export default class ToDoModel {
         if (listIndex >= 0) {
             let item = this.currentList.getItemAtIndex(listIndex);
             item.setDueDate(oldDate);
+            this.view.viewList(this.currentList);
+        }
+    }
+
+    updateStatus(statusID, newStatus) {
+        let listIndex = -1;
+        for (let i = 0; (i < this.currentList.items.length); i++) {
+            if (this.currentList.items[i].id === statusID)
+                listIndex = i;
+        }
+        if (listIndex >= 0) {
+            let item = this.currentList.getItemAtIndex(listIndex);
+            item.setStatus(newStatus);
+            this.view.viewList(this.currentList);
+        }
+    }
+
+    redoUpdateStatus(statusID, oldStatus) {
+        let listIndex = -1;
+        for (let i = 0; (i < this.currentList.items.length); i++) {
+            if (this.currentList.items[i].id === statusID)
+                listIndex = i;
+        }
+        if (listIndex >= 0) {
+            let item = this.currentList.getItemAtIndex(listIndex);
+            item.setStatus(oldStatus);
             this.view.viewList(this.currentList);
         }
     }

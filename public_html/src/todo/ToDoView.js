@@ -249,6 +249,8 @@ export default class ToDoView {
                     let chosen = current.value ;
                     sInput.value = chosen;
                     current.replaceWith(sInput);
+
+                    thisController.handleStatusChange(listItem.status, chosen, listItem.id);
                 }
 
             }

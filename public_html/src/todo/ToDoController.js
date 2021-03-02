@@ -60,4 +60,8 @@ export default class ToDoController {
     handleDeleteItem(itemID) {
         this.model.DeleteItemTransaction(itemID);
     }
+
+    handleStatusChange(oldStat, newStat, id) {
+        this.model.UpdateStatusTransaction(oldStat,newStat, id );
+    }
 }
