@@ -148,3 +148,11 @@
     cursor:pointer;
     background-color: #5c6066;
 }
+
+#blue-status {
+    color: #8ed4f8;
+}
+
+#yellow-status {
+    color: #f5bc75;
+}

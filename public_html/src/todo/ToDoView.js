@@ -151,6 +151,11 @@ export default class ToDoView {
             let sInput = document.createElement('input');
             sInput.className = 'status-selector input-fields';
             sInput.value= listItem.status;
+            if (listItem.status === "complete"){
+                sInput.id = 'blue-status';
+            }else {
+                sInput.id = 'yellow-status';
+            }
             sInput.setAttribute( "style" , "border: 0px; background-color: transparent");
             status.appendChild(sInput)
             status.setAttribute( "style" , "border: 0px; background-color: transparent");
