@@ -119,6 +119,7 @@ export default class ToDoModel {
      * @param {*} initName The name of this to add.
      */
     addNewList(initName) {
+        this.tps.clearAllTransactions();
         let newList = new ToDoList(this.nextListId++);
         if (initName)
             newList.setName(initName);

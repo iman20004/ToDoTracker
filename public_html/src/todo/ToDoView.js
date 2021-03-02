@@ -19,7 +19,7 @@ export default class ToDoView {
         listElement.setAttribute("id", newListId);
         listElement.setAttribute("class", "todo_button list-item");
         
-        /*let textNode = document.createElement("input");
+        /*let textNode = document.createElement("label");
         textNode.type = 'text';
         textNode.value = newList.name;
         textNode.setAttribute( "style" , "border: 0px; background: transparent");
@@ -52,7 +52,7 @@ export default class ToDoView {
             parent.removeChild(parent.firstChild);
         }
     }
-    
+
 
     // REFRESHES ALL THE LISTS IN THE LEFT SIDEBAR
     refreshLists(lists) {
@@ -142,17 +142,18 @@ export default class ToDoView {
             date.value = listItem.dueDate;
             date.setAttribute( "style" , "border: 0px; background: transparent");
 
-            /*let form = document.createElement('form');
-            form.className = 'status-col';*/
-
-            // Status field
-            let status = document.createElement('div');
+            // Status field wrapper
+            let status = document.createElement('label');
             status.className = 'status-col input-fields';
             status.id = 'status-field-'+ listItem.id;
-            status.innerHTML = listItem.status;
-            status.setAttribute( "style" , "border: 0px; background-color: transparent");
 
-            //form.appendChild(status);
+            // Status field input
+            let sInput = document.createElement('input');
+            sInput.className = 'status-selector input-fields';
+            sInput.value= listItem.status;
+            sInput.setAttribute( "style" , "border: 0px; background-color: transparent");
+            status.appendChild(sInput)
+            status.setAttribute( "style" , "border: 0px; background-color: transparent");
 
             // Controls div
             let controls = document.createElement('div');
@@ -218,32 +219,39 @@ export default class ToDoView {
                 thisController.handleDateChange(oldDate, newDate, listItem.id);
             }
 
-            // Status field events
-            status.onclick = function(event) {
-                let field = event.target;
 
-                let selector = document.createElement('select')
-                selector.value = listItem.status;
-                selector.className = 'status-col input-fields';
+            // Status field events
+            sInput.onclick = function(event) {
+                let child = event.target;
+
+                let selector = document.createElement('select');
+                
+                selector.className = 'status-selector input-fields';
                 let op1 = document.createElement('option');
                 op1.innerHTML = "complete";
                 selector.appendChild(op1);
                 let op2 = document.createElement('option');
                 op2.innerHTML = "incomplete";
                 selector.appendChild(op2);
-                selector.setAttribute("style", "border: solid 2px #1E90FF; background-color: transparent; font-size: 12px; font-weight: 400");
-                field.replaceWith(selector);
 
-                /*selector.onfocusout = function(event) {
-                    console.log("hellohello");
-                }*/
+                //selector.defaultValue = listItem.status;
+                if (listItem.status === "complete"){
+                    op1.selected = 'selected';
+                }else {
+                    op2.selected = 'selected';
+                }
+
+                selector.setAttribute("style", "border: solid 2px #1E90FF; background-color: transparent; font-size: 12px; font-weight: 400");
+                child.replaceWith(selector);
+              
+                selector.onblur = function(e) {
+                    let current = e.target;
+                    let chosen = current.value ;
+                    sInput.value = chosen;
+                    current.replaceWith(sInput);
+                }
 
             }
-
-            /*status.onblur = function(event) {
-                console.log("hello");
-            }*/
-
 
             // Arrow Up event
             arrowUp.onclick = function(event) {
