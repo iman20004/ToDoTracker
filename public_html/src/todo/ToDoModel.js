@@ -313,6 +313,8 @@ export default class ToDoModel {
         document.getElementById("add-item-button").disabled = true;
         document.getElementById("delete-list-button").disabled = true;
         document.getElementById("close-list-button").disabled = true;
+        document.getElementById("undo-button").disabled = true;
+        document.getElementById("redo-button").disabled = true;
     }
 
     /**

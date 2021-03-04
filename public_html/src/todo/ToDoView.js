@@ -31,7 +31,7 @@ export default class ToDoView {
 
         // SETUP THE HANDLER FOR WHEN SOMEONE MOUSE CLICKS ON OUR LIST
         let thisController = this.controller;
-        listElement.onmousedown = function() {
+        listElement.onclick = function() {
             document.getElementById("add-list-button").disabled = true;
             document.getElementById("add-item-button").disabled = false;
             document.getElementById("delete-list-button").disabled = false;
@@ -167,17 +167,19 @@ export default class ToDoView {
             controls.className = 'list-controls-col';
 
             // Arrow up 
-            let arrowUp = document.createElement('div');
+            let arrowUp = document.createElement('button');
             arrowUp.className = 'list-item-control material-icons';
+            arrowUp.id = 'arrow-up-'+ listItem.id;
             arrowUp.innerHTML = 'keyboard_arrow_up';
 
             // Arrow down
-            let arrowDown = document.createElement('div');
+            let arrowDown = document.createElement('button');
             arrowDown.className = 'list-item-control material-icons';
+            arrowDown.id = 'arrow-down-'+ listItem.id;
             arrowDown.innerHTML = 'keyboard_arrow_down';
 
             // Close item
-            let close = document.createElement('div');
+            let close = document.createElement('button');
             close.className = 'list-item-control material-icons';
             close.innerHTML = 'close';
 
@@ -192,6 +194,14 @@ export default class ToDoView {
             listItemElement.appendChild(controls);
             itemsListDiv.appendChild(listItemElement);
 
+            if (i == 0){
+                document.getElementById("arrow-up-"+listItem.id).disabled = true;
+            }
+            if (i == (list.items.length-1)) {
+                document.getElementById("arrow-down-"+listItem.id).disabled = true;
+            }
+
+            
             let thisController = this.controller;
 
             // Task field events
@@ -200,13 +210,16 @@ export default class ToDoView {
                 let field = event.target;
                 oldDesc = field.value;
                 field.setAttribute("style", "border: solid 2px #1E90FF; background-color: #5c6066; font-size: 12px; font-weight: 400");
+                event.preventDefault();
             }
             
             task.onblur = function(event) {
                 let field = event.target;
                 let newDesc = field.value;
                 field.setAttribute("style", "border: 0px; background: transparent");
-                thisController.handleDescChange(oldDesc, newDesc, listItem.id);
+                if (oldDesc !== newDesc){
+                    thisController.handleDescChange(oldDesc, newDesc, listItem.id);
+                }
             }
 
             // Date field events
@@ -223,10 +236,12 @@ export default class ToDoView {
                 let newDate = field.value;
                 field.setAttribute("type", "");
                 field.setAttribute("style", "border: 0px; background: transparent");
-                thisController.handleDateChange(oldDate, newDate, listItem.id);
+                if (oldDate !== newDate){
+                    thisController.handleDateChange(oldDate, newDate, listItem.id);
+                }
             }
 
-
+            
             // Status field events
             sInput.onclick = function(event) {
                 let child = event.target;
@@ -257,7 +272,9 @@ export default class ToDoView {
                     sInput.value = chosen;
                     current.replaceWith(sInput);
 
-                    thisController.handleStatusChange(listItem.status, chosen, listItem.id);
+                    if (listItem.status !== chosen) {
+                        thisController.handleStatusChange(listItem.status, chosen, listItem.id);
+                    }
                 }
 
             }
@@ -279,6 +296,7 @@ export default class ToDoView {
             }
 
         }
+
 
     }
 

@@ -149,6 +149,7 @@ export default class jsTPS {
         // ADD THE TRANSACTION
         this.transactions[this.mostRecentTransaction+1] = transaction;
 
+        document.getElementById("undo-button").disabled = false;
         // AND EXECUTE IT
         this.doTransaction();
     }
@@ -167,6 +168,13 @@ export default class jsTPS {
             transaction.doTransaction();
             this.mostRecentTransaction++;
             this.performingDo = false;
+
+        }
+        if (!this.hasTransactionToRedo()) {
+            document.getElementById("redo-button").disabled = true;
+        }
+        if (this.hasTransactionToRedo()) {
+            document.getElementById("undo-button").disabled = false;
         }
     }
 
@@ -181,6 +189,13 @@ export default class jsTPS {
             transaction.undoTransaction();
             this.mostRecentTransaction--;
             this.performingUndo = false;
+        }
+
+        if (!this.hasTransactionToUndo()) {
+            document.getElementById("undo-button").disabled = true;
+        }
+        if (this.hasTransactionToRedo()) {
+            document.getElementById("redo-button").disabled = false;
         }
     }
 
@@ -197,6 +212,9 @@ export default class jsTPS {
         // TOP OF THE TPS STACK TOO
         this.mostRecentTransaction = -1;      
         this.numTransactions = 0; 
+
+        document.getElementById("undo-button").disabled = true;
+        document.getElementById("redo-button").disabled = true;
     }
 
     /**
