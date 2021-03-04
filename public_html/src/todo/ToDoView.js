@@ -17,7 +17,7 @@ export default class ToDoView {
         let newListId = "todo-list-" + newList.id;
         let listElement = document.createElement("div");
         listElement.setAttribute("id", newListId);
-        listElement.setAttribute("class", "todo_button list-item");
+        listElement.setAttribute("class", "list-button list-item");
         
         /*let textNode = document.createElement("label");
         textNode.type = 'text';
@@ -32,15 +32,13 @@ export default class ToDoView {
         // SETUP THE HANDLER FOR WHEN SOMEONE MOUSE CLICKS ON OUR LIST
         let thisController = this.controller;
         listElement.onmousedown = function() {
+            document.getElementById("add-list-button").disabled = true;
+            document.getElementById("add-item-button").disabled = false;
+            document.getElementById("delete-list-button").disabled = false;
+            document.getElementById("close-list-button").disabled = false;
             thisController.handleLoadList(newList.id);
         }
 
-        /*
-        listElement.ondblclick = function(event){
-            let selected = event.target;
-            //let text = selected.childNode;
-            //text.setAttribute("contenteditable", true);
-        }*/
     }
 
     // REMOVES ALL THE LISTS FROM THE LEFT SIDEBAR
@@ -89,6 +87,10 @@ export default class ToDoView {
         close.onclick = (event) => { modal.style.display = "none";}
         confirm.onclick = function(){
             modal.style.display = "none"; 
+            document.getElementById("add-list-button").disabled = false;
+            document.getElementById("add-item-button").disabled = true;
+            document.getElementById("delete-list-button").disabled = true;
+            document.getElementById("close-list-button").disabled = true;
             control.handleListDeletion();
         }
 

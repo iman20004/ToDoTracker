@@ -310,6 +310,9 @@ export default class ToDoModel {
     // WE NEED THE VIEW TO UPDATE WHEN DATA CHANGES.
     setView(initView) {
         this.view = initView;
+        document.getElementById("add-item-button").disabled = true;
+        document.getElementById("delete-list-button").disabled = true;
+        document.getElementById("close-list-button").disabled = true;
     }
 
     /**
@@ -325,5 +328,9 @@ export default class ToDoModel {
         this.currentList = null;
         this.tps.clearAllTransactions();
         this.view.clearItemsList();
+        document.getElementById("add-list-button").disabled = false;
+        document.getElementById("add-item-button").disabled = true;
+        document.getElementById("delete-list-button").disabled = true;
+        document.getElementById("close-list-button").disabled = true;
     }
 }

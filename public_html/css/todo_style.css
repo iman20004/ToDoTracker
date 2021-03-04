@@ -117,15 +117,6 @@
 }
 
 
-.todo_button {
-    cursor:pointer;
-    background-color: var(--swatch-complement);
-}
-
-.todo_button:hover {
-    background-color: rgba(255,255,255, 0.5);
-}
-
 .todo_button_grid {
     cursor:pointer;
     background-color: var(--swatch-primary);
@@ -155,4 +146,29 @@
 
 #yellow-status {
     color: #f5bc75;
+}
+
+#add-list-button {
+    color: #ffc800;
+}
+
+#add-list-button:disabled {
+    pointer-events: none;
+    color: #666666;
+}
+
+.material-icons {
+    border: 0px;
+    color: rgb(233, 237, 240);
+    background-color: transparent;
+}
+
+.list-button:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.list-item-control:disabled {
+    pointer-events: none;
+    color: #666666;
 }
