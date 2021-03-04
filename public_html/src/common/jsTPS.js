@@ -173,7 +173,7 @@ export default class jsTPS {
         if (!this.hasTransactionToRedo()) {
             document.getElementById("redo-button").disabled = true;
         }
-        if (this.hasTransactionToRedo()) {
+        if (this.hasTransactionToUndo()) {
             document.getElementById("undo-button").disabled = false;
         }
     }
