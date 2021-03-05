@@ -73,7 +73,7 @@ html, body {
     display: grid;
     padding: 0.5%;
     grid-template-rows: 5% 92%;
-    grid-template-columns: 14.5% 84.5%;
+    grid-template-columns: 14% 85%;
     row-gap: 1%;
 }
 

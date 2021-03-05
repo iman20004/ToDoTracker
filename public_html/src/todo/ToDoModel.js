@@ -330,6 +330,7 @@ export default class ToDoModel {
         this.currentList = null;
         this.tps.clearAllTransactions();
         this.view.clearItemsList();
+        this.view.refreshLists(this.toDoLists);
         document.getElementById("add-list-button").disabled = false;
         document.getElementById("add-item-button").disabled = true;
         document.getElementById("delete-list-button").disabled = true;

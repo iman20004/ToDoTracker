@@ -18,25 +18,21 @@ export default class ToDoView {
         let listElement = document.createElement("div");
         listElement.setAttribute("id", newListId);
         listElement.setAttribute("class", "list-button list-item");
-        
-        /*let textNode = document.createElement("label");
-        textNode.type = 'text';
-        textNode.value = newList.name;
-        textNode.setAttribute( "style" , "border: 0px; background: transparent");
-        textNode.setAttribute("contenteditable", "false");
-        listElement.appendChild(textNode);*/
 
         listElement.appendChild(document.createTextNode(newList.name));
         listsElement.appendChild(listElement);
 
         // SETUP THE HANDLER FOR WHEN SOMEONE MOUSE CLICKS ON OUR LIST
         let thisController = this.controller;
-        listElement.onclick = function() {
+        listElement.onclick = function(e) {
             document.getElementById("add-list-button").disabled = true;
             document.getElementById("add-item-button").disabled = false;
             document.getElementById("delete-list-button").disabled = false;
             document.getElementById("close-list-button").disabled = false;
             thisController.handleLoadList(newList.id);
+            let viewed = e.target;
+            document.getElementById(viewed.id).style.color = "black";
+            document.getElementById(viewed.id).style.backgroundColor = "#ffc800";
         }
 
     }
