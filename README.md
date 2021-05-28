@@ -7,10 +7,14 @@ This is the first implementation of the ToDoTracker app using vanilla Javascript
 
 ### Functionality/Features
 - [x] Create a Todo List
-- [x] Delete a Todo List
-- [x] Edit Todo List Name
+- [x] Delete a Todo List (with verification)
 - [x] Most recently opened list appears at the top
-- [x] 
+- [x] Add new list item
+- [x] Delete list item
+- [x] Edit List Item (Name, Due Date, Status)
+- [x] Undo, Redo
+- [x] Reorder list items (move up and down)
+- [x] Fool proof design (disable buttons which can't be used and mouse over highlighting)
 
 ### Starting screen
 <img width="800" alt="Screen Shot 2021-05-27 at 10 32 14 PM" src="https://user-images.githubusercontent.com/60799230/119921130-78776b80-bf3b-11eb-8312-5d94fc27d634.png">
